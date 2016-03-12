@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="dcs_password_reset.service.date_time_generator.generic.class">DCS\PasswordReset\CoreBundle\Service\DateTimeGenerator\GenericDateTimeGenerator</parameter>
+        <parameter key="dcs_password_reset.service.token_generator.random.class">DCS\PasswordReset\CoreBundle\Service\TokenGenerator\RandomGenerator</parameter>
+        <parameter key="dcs_password_reset.service.token_generator.uuid.class">DCS\PasswordReset\CoreBundle\Service\TokenGenerator\UuidGenerator</parameter>
+        <parameter key="dcs_password_reset.service.reset_request_factory.class">DCS\PasswordReset\CoreBundle\Service\ResetRequestFactory</parameter>
+    </parameters>
+
+    <services>
+        <!--Date Time Generator-->
+        <service id="dcs_password_reset.service.date_time_generator.generic" class="%dcs_password_reset.service.date_time_generator.generic.class%" />
+        <!--Token Generator-->
+        <service id="dcs_password_reset.service.token_generator.random" class="%dcs_password_reset.service.token_generator.random.class%" />
+        <service id="dcs_password_reset.service.token_generator.uuid" class="%dcs_password_reset.service.token_generator.uuid.class%" />
+        <!--Reset Request Factory-->
+        <service id="dcs_password_reset.service.reset_request_factory" class="%dcs_password_reset.service.reset_request_factory.class%">
+            <argument>%dcs_password_reset.model_class%</argument>
+            <argument type="service" id="dcs_password_reset.service.token_generator" />
+            <argument type="service" id="dcs_password_reset.service.date_time_generator" />
+        </service>
+    </services>
+</container>

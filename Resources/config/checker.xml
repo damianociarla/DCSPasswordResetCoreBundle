@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="dcs_password_reset.checker.is_available_reset_request.class">DCS\PasswordReset\CoreBundle\Checker\IsAvailableResetRequest</parameter>
+        <parameter key="dcs_password_reset.checker.user_can_create_new_reset_request.class">DCS\PasswordReset\CoreBundle\Checker\UserCanCreateNewResetRequest</parameter>
+        <parameter key="dcs_password_reset.checker.time_has_passed_since_last_reset_request.class">DCS\PasswordReset\CoreBundle\Checker\TimeHasPassedSinceLastResetRequest</parameter>
+    </parameters>
+
+    <services>
+        <service id="dcs_password_reset.checker.is_available_reset_request" class="%dcs_password_reset.checker.is_available_reset_request.class%">
+            <argument type="service" id="dcs_password_reset.service.date_time_generator" />
+            <argument>%dcs_password_reset.token_ttl%</argument>
+        </service>
+        <service id="dcs_password_reset.checker.user_can_create_new_reset_request" class="%dcs_password_reset.checker.user_can_create_new_reset_request.class%">
+            <argument type="service" id="dcs_password_reset.repository" />
+            <argument type="service" id="dcs_password_reset.checker.time_has_passed_since_last_reset_request" />
+        </service>
+        <service id="dcs_password_reset.checker.time_has_passed_since_last_reset_request" class="%dcs_password_reset.checker.time_has_passed_since_last_reset_request.class%">
+            <argument type="service" id="dcs_password_reset.service.date_time_generator" />
+            <argument>%dcs_password_reset.waiting_time_new_request%</argument>
+        </service>
+    </services>
+</container>
