@@ -18,7 +18,7 @@ class DCSPasswordResetCoreExtension extends Extension
         $container->setParameter('dcs_password_reset.model_class', $config['model_class']);
         $container->setParameter('dcs_password_reset.repository_service', $config['repository_service']);
 
-        $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
         $loader->load('service.xml');
         $container->setAliases([
