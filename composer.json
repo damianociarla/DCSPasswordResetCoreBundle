@@ -1,0 +1,41 @@
+{
+  "name": "dcs/password-reset-core-bundle",
+  "type": "symfony-bundle",
+  "description": "This bundle provides the logic to perform a complete flow of password change request",
+  "keywords": ["User","Password","Symfony","Reset"],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Damiano Ciarla",
+      "email": "damiano.ciarla@gmail.org"
+    }
+  ],
+  "require": {
+    "php": ">=5.3.9",
+    "ramsey/uuid": "^3.3"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^5",
+    "dcs/user-core-bundle": "~1.0@dev",
+    "symfony/framework-bundle": "~2.8|~3.0"
+  },
+  "suggest": {
+    "dcs/password-reset-explain-view-bundle": "Provides the visual display of password recovery services through view and form",
+    "dcs/password-reset-persistence-orm-bundle": "Provides the implementation of the persistence on database using Doctrine ORM of all password requests"
+  },
+  "autoload": {
+    "psr-4": {
+      "DCS\\PasswordReset\\CoreBundle\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "DCS\\PasswordReset\\CoreBundle\\Tests\\": "tests"
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0.x-dev"
+    }
+  }
+}
