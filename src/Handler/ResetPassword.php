@@ -73,6 +73,15 @@ class ResetPassword
         $this->dateTimeGenerator = $dateTimeGenerator;
     }
 
+    /**
+     * Performs the reset password
+     *
+     * @param ResetRequestInterface $resetRequest
+     * @param string $password
+     * @throws ResetRequestAlreadyUsedException
+     * @throws TimeToLiveException
+     * @throws UnauthorizedResetPasswordException
+     */
     public function __invoke(ResetRequestInterface $resetRequest, $password)
     {
         if (null !== $resetRequest->getUsedAt()) {

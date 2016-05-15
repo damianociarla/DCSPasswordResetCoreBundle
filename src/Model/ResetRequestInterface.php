@@ -69,7 +69,7 @@ interface ResetRequestInterface
     /**
      * Get usedAt
      *
-     * @return \DateTime
+     * @return \DateTime|null
      */
     public function getUsedAt();
 

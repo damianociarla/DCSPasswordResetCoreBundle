@@ -27,18 +27,18 @@ abstract class ResetRequest implements ResetRequestInterface
     protected $createdAt;
 
     /**
-     * @var \DateTime
+     * @var \DateTime|null
      */
     protected $usedAt;
 
     /**
      * ResetRequest constructor.
      *
-     * @param UserInterface $user
-     * @param string $token
-     * @param \DateTime $createdAt
+     * @param UserInterface|null $user
+     * @param string|null $token
+     * @param \DateTime|null $createdAt
      */
-    public function __construct(UserInterface $user, $token, \DateTime $createdAt)
+    public function __construct(UserInterface $user = null, $token = null, \DateTime $createdAt = null)
     {
         $this->user = $user;
         $this->token = $token;

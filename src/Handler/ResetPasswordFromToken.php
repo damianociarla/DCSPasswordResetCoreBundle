@@ -30,6 +30,13 @@ class ResetPasswordFromToken
         $this->resetPasswordHandler = $resetPasswordHandler;
     }
 
+    /**
+     * Performs the reset password
+     *
+     * @param string $token
+     * @param string $password
+     * @throws ResetRequestNotFoundException
+     */
     public function __invoke($token, $password)
     {
         $resetRequest = $this->resetRequestRepository->findOneByToken($token);
@@ -38,7 +45,6 @@ class ResetPasswordFromToken
             throw new ResetRequestNotFoundException($token);
         }
 
-        $resetPasswordHandler = $this->resetPasswordHandler;
-        $resetPasswordHandler($resetRequest, $password);
+        call_user_func_array($this->resetPasswordHandler, [$resetRequest, $password]);
     }
 }

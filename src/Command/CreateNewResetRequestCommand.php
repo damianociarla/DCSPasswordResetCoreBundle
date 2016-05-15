@@ -10,9 +10,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CreateNewResetRequestCommand extends ContainerAwareCommand
 {
-    /**
-     * @inheritDoc
-     */
     protected function configure()
     {
         $this
@@ -23,9 +20,6 @@ class CreateNewResetRequestCommand extends ContainerAwareCommand
         ;
     }
 
-    /**
-     * @inheritDoc
-     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $id = $input->getOption('id');
