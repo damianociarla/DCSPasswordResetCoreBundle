@@ -3,13 +3,18 @@
 namespace DCS\PasswordReset\CoreBundle\Tests\Handler;
 
 use DCS\PasswordReset\CoreBundle\Checker\IsAvailableResetRequest;
+use DCS\PasswordReset\CoreBundle\DCSPasswordResetCoreEvents;
+use DCS\PasswordReset\CoreBundle\Event\ResetRequestCheckerEvent;
 use DCS\PasswordReset\CoreBundle\Exception\ResetRequestAlreadyUsedException;
 use DCS\PasswordReset\CoreBundle\Exception\TimeToLiveException;
+use DCS\PasswordReset\CoreBundle\Exception\UnauthorizedResetPasswordException;
 use DCS\PasswordReset\CoreBundle\Handler\ResetPassword;
 use DCS\PasswordReset\CoreBundle\Service\DateTimeGenerator\DateTimeGeneratorInterface;
 use DCS\PasswordReset\CoreBundle\Tests\Helper\ResetRequest;
 use DCS\User\CoreBundle\Helper\PasswordHelperInterface;
 use DCS\User\CoreBundle\Model\UserInterface;
+use Symfony\Component\EventDispatcher\Event;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use DCS\User\CoreBundle\Manager\Save as UserSave;
 use DCS\PasswordReset\CoreBundle\Manager\Save as ResetRequestSave;
@@ -19,7 +24,7 @@ class ResetPasswordTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getData
      */
-    public function test($resetRequestUsed, $timeToLivePassed)
+    public function test($resetRequestUsed, $timeToLivePassed, $authorized)
     {
         $password = 'password';
 
@@ -31,10 +36,14 @@ class ResetPasswordTest extends \PHPUnit_Framework_TestCase
             ->method('__invoke')
             ->willReturn(!$timeToLivePassed);
 
-        $eventDispatcher = $this->getMock(EventDispatcherInterface::class);
-        $eventDispatcher
-            ->expects($this->exactly($resetRequestUsed || $timeToLivePassed ? 0 : 1))
-            ->method('dispatch');
+        $eventDispatcher = new EventDispatcher();
+        $eventDispatcher->addListener(DCSPasswordResetCoreEvents::BEFORE_RESET_PASSWORD, function (ResetRequestCheckerEvent $event) use ($authorized) {
+            if ($authorized) {
+                $event->setAsAuthorized();
+            } else {
+                $event->setAsUnauthorized();
+            }
+        });
 
         if ($resetRequestUsed) {
             $this->expectException(ResetRequestAlreadyUsedException::class);
@@ -44,9 +53,13 @@ class ResetPasswordTest extends \PHPUnit_Framework_TestCase
             $this->expectException(TimeToLiveException::class);
         }
 
+        if (!$resetRequestUsed && !$timeToLivePassed && !$authorized) {
+            $this->expectException(UnauthorizedResetPasswordException::class);
+        }
+
         $passwordHelper = $this->getMock(PasswordHelperInterface::class);
 
-        if ($resetRequestUsed || $timeToLivePassed) {
+        if ($resetRequestUsed || $timeToLivePassed || !$authorized) {
             $passwordHelper
                 ->expects($this->exactly(0))
                 ->method('updateUserPassword');
@@ -65,12 +78,12 @@ class ResetPasswordTest extends \PHPUnit_Framework_TestCase
             ->getMock();
 
         $userSave
-            ->expects($this->exactly($resetRequestUsed || $timeToLivePassed ? 0 : 1))
+            ->expects($this->exactly($resetRequestUsed || $timeToLivePassed || !$authorized ? 0 : 1))
             ->method('__invoke');
 
         $dateTimeGenerator = $this->getMock(DateTimeGeneratorInterface::class);
         $dateTimeGenerator
-            ->expects($this->exactly($resetRequestUsed || $timeToLivePassed ? 0 : 1))
+            ->expects($this->exactly($resetRequestUsed || $timeToLivePassed || !$authorized ? 0 : 1))
             ->method('generate');
 
         $resetRequestSave = $this->getMockBuilder(ResetRequestSave::class)
@@ -78,7 +91,7 @@ class ResetPasswordTest extends \PHPUnit_Framework_TestCase
             ->getMock();
 
         $resetRequestSave
-            ->expects($this->exactly($resetRequestUsed || $timeToLivePassed ? 0 : 1))
+            ->expects($this->exactly($resetRequestUsed || $timeToLivePassed || !$authorized ? 0 : 1))
             ->method('__invoke');
 
         $resetRequest = new ResetRequest($this->getMock(UserInterface::class));
@@ -91,10 +104,14 @@ class ResetPasswordTest extends \PHPUnit_Framework_TestCase
     public function getData()
     {
         return [
-            [false, false],
-            [false, true],
-            [true, true],
-            [true, false],
+            [false, false, true],
+            [false, false, false],
+            [false, true, true],
+            [false, true, false],
+            [true, true, true],
+            [true, true, false],
+            [true, false, true],
+            [true, false, false],
         ];
     }
 }
