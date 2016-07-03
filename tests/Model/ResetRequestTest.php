@@ -11,7 +11,7 @@ class ResetRequestTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->user = $this->getMock(UserInterface::class);
+        $this->user = $this->createMock(UserInterface::class);
     }
 
     public function testConstructor()

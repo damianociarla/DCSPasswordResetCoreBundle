@@ -57,7 +57,7 @@ class ResetPasswordTest extends \PHPUnit_Framework_TestCase
             $this->expectException(UnauthorizedResetPasswordException::class);
         }
 
-        $passwordHelper = $this->getMock(PasswordHelperInterface::class);
+        $passwordHelper = $this->createMock(PasswordHelperInterface::class);
 
         if ($resetRequestUsed || $timeToLivePassed || !$authorized) {
             $passwordHelper
@@ -81,7 +81,7 @@ class ResetPasswordTest extends \PHPUnit_Framework_TestCase
             ->expects($this->exactly($resetRequestUsed || $timeToLivePassed || !$authorized ? 0 : 1))
             ->method('__invoke');
 
-        $dateTimeGenerator = $this->getMock(DateTimeGeneratorInterface::class);
+        $dateTimeGenerator = $this->createMock(DateTimeGeneratorInterface::class);
         $dateTimeGenerator
             ->expects($this->exactly($resetRequestUsed || $timeToLivePassed || !$authorized ? 0 : 1))
             ->method('generate');
@@ -94,7 +94,7 @@ class ResetPasswordTest extends \PHPUnit_Framework_TestCase
             ->expects($this->exactly($resetRequestUsed || $timeToLivePassed || !$authorized ? 0 : 1))
             ->method('__invoke');
 
-        $resetRequest = new ResetRequest($this->getMock(UserInterface::class));
+        $resetRequest = new ResetRequest($this->createMock(UserInterface::class));
         $resetRequest->setUsedAt($resetRequestUsed ? new \DateTime() : null);
 
         $resetPassword = new ResetPassword($isAvailableResetRequestChecker, $eventDispatcher, $userSave, $passwordHelper, $resetRequestSave, $dateTimeGenerator);

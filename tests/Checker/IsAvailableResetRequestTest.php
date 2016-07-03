@@ -14,7 +14,7 @@ class IsAvailableResetRequestTest extends \PHPUnit_Framework_TestCase
      */
     public function test($dateTimeReferrer, $dateTimeRequest, $ttl, $expected)
     {
-        $dateTimeGenerator = $this->getMock(DateTimeGeneratorInterface::class);
+        $dateTimeGenerator = $this->createMock(DateTimeGeneratorInterface::class);
         $dateTimeGenerator->expects($this->any())->method('generate')->willReturn($dateTimeReferrer);
 
         $checker = new IsAvailableResetRequest($dateTimeGenerator, $ttl);

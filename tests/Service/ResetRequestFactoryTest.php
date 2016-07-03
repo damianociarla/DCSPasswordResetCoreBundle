@@ -20,10 +20,10 @@ class ResetRequestFactoryTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->tokenGenerator = $this->getMock(TokenGeneratorInterface::class);
+        $this->tokenGenerator = $this->createMock(TokenGeneratorInterface::class);
         $this->tokenGenerator->method('generate')->willReturn(self::$token);
 
-        $this->dateTimeGenerator = $this->getMock(DateTimeGeneratorInterface::class);
+        $this->dateTimeGenerator = $this->createMock(DateTimeGeneratorInterface::class);
         $this->dateTimeGenerator->method('generate')->willReturn(\DateTime::createFromFormat('Y-m-d H:i:s', self::$currentDateTime));
 
     }
@@ -42,7 +42,7 @@ class ResetRequestFactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testCreateFromUserMethod(ResetRequestFactoryInterface $resetRequestFactory)
     {
-        $user = $this->getMock(UserInterface::class);
+        $user = $this->createMock(UserInterface::class);
         $resetRequest = $resetRequestFactory->createFromUser($user);
         
         $this->assertInstanceOf(ResetRequestInterface::class, $resetRequest);

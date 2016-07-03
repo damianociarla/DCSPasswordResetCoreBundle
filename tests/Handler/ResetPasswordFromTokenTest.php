@@ -25,7 +25,7 @@ class ResetPasswordFromTokenTest extends \PHPUnit_Framework_TestCase
         $token = 'token';
         $password = 'password';
 
-        $resetRequestRepository = $this->getMock(ResetRequestRepositoryInterface::class);
+        $resetRequestRepository = $this->createMock(ResetRequestRepositoryInterface::class);
         $resetRequestRepository
             ->method('findOneByToken')->with($token)->willReturn($resetPassword);
 
@@ -44,7 +44,7 @@ class ResetPasswordFromTokenTest extends \PHPUnit_Framework_TestCase
         $token = 'token';
         $password = 'password';
 
-        $resetRequestRepository = $this->getMock(ResetRequestRepositoryInterface::class);
+        $resetRequestRepository = $this->createMock(ResetRequestRepositoryInterface::class);
         $resetRequestRepository
             ->method('findOneByToken')->with($token)->willReturn(null);
 

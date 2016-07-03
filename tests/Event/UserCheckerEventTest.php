@@ -10,7 +10,7 @@ class UserCheckerEventTest extends \PHPUnit_Framework_TestCase
 {
     public function test()
     {
-        $user = $this->getMock(UserInterface::class);
+        $user = $this->createMock(UserInterface::class);
         $userCheckerEvent = new UserCheckerEvent($user);
 
         $this->assertInstanceOf(Event::class, $userCheckerEvent);

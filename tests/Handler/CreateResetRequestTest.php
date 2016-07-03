@@ -21,7 +21,7 @@ class CreateResetRequestTest extends \PHPUnit_Framework_TestCase
      */
     public function test($userCheckResult, $authorized)
     {
-        $user = $this->getMock(UserInterface::class);
+        $user = $this->createMock(UserInterface::class);
 
         $userCanCreateNewResetRequest = $this
             ->getMockBuilder(UserCanCreateNewResetRequest::class)
@@ -43,7 +43,7 @@ class CreateResetRequestTest extends \PHPUnit_Framework_TestCase
             }
         });
 
-        $resetRequestFactory = $this->getMock(ResetRequestFactoryInterface::class);
+        $resetRequestFactory = $this->createMock(ResetRequestFactoryInterface::class);
         $resetRequestFactory
             ->expects($this->exactly($userCheckResult && $authorized ? 1 : 0))
             ->method('createFromUser')

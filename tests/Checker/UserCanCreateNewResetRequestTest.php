@@ -16,13 +16,13 @@ class UserCanCreateNewResetRequestTest extends \PHPUnit_Framework_TestCase
      */
     public function test($dateTimeReferrer, $waitingTimeNewRequest, $returnRepository, $expected)
     {
-        $dateTimeGenerator = $this->getMock(DateTimeGeneratorInterface::class);
+        $dateTimeGenerator = $this->createMock(DateTimeGeneratorInterface::class);
         $dateTimeGenerator->expects($this->any())->method('generate')->willReturn($dateTimeReferrer);
 
         $checker = new TimeHasPassedSinceLastResetRequest($dateTimeGenerator, $waitingTimeNewRequest);
-        $user = $this->getMock(UserInterface::class);
+        $user = $this->createMock(UserInterface::class);
 
-        $resetRequestRepository = $this->getMock(ResetRequestRepositoryInterface::class);
+        $resetRequestRepository = $this->createMock(ResetRequestRepositoryInterface::class);
         $resetRequestRepository->expects($this->once())->method('findLatestNotUsedByUser')->with($user)->willReturn($returnRepository);
 
         $userCanCreateNewResetRequest = new UserCanCreateNewResetRequest($resetRequestRepository, $checker);
