@@ -2,8 +2,8 @@
 
 namespace DCS\PasswordReset\CoreBundle\Service;
 
-use DCS\User\CoreBundle\Model\UserInterface;
 use DCS\PasswordReset\CoreBundle\Model\ResetRequestInterface;
+use DCS\User\CoreBundle\Model\UserInterface;
 
 interface ResetRequestFactoryInterface
 {

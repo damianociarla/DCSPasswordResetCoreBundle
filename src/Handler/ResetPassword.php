@@ -2,8 +2,6 @@
 
 namespace DCS\PasswordReset\CoreBundle\Handler;
 
-use DCS\User\CoreBundle\Helper\PasswordHelperInterface;
-use DCS\User\CoreBundle\Manager\Save as UserSave;
 use DCS\PasswordReset\CoreBundle\Checker\IsAvailableResetRequest;
 use DCS\PasswordReset\CoreBundle\DCSPasswordResetCoreEvents;
 use DCS\PasswordReset\CoreBundle\Event\ResetRequestCheckerEvent;
@@ -13,6 +11,8 @@ use DCS\PasswordReset\CoreBundle\Exception\UnauthorizedResetPasswordException;
 use DCS\PasswordReset\CoreBundle\Manager\Save as ResetRequestSave;
 use DCS\PasswordReset\CoreBundle\Model\ResetRequestInterface;
 use DCS\PasswordReset\CoreBundle\Service\DateTimeGenerator\DateTimeGeneratorInterface;
+use DCS\User\CoreBundle\Helper\PasswordHelperInterface;
+use DCS\User\CoreBundle\Manager\Save as UserSave;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class ResetPassword

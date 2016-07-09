@@ -2,9 +2,9 @@
 
 namespace DCS\PasswordReset\CoreBundle\Service;
 
-use DCS\User\CoreBundle\Model\UserInterface;
 use DCS\PasswordReset\CoreBundle\Service\DateTimeGenerator\DateTimeGeneratorInterface;
 use DCS\PasswordReset\CoreBundle\Service\TokenGenerator\TokenGeneratorInterface;
+use DCS\User\CoreBundle\Model\UserInterface;
 
 class ResetRequestFactory implements ResetRequestFactoryInterface
 {

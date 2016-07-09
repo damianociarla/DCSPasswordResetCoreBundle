@@ -2,8 +2,8 @@
 
 namespace DCS\PasswordReset\CoreBundle\Checker;
 
-use DCS\User\CoreBundle\Model\UserInterface;
 use DCS\PasswordReset\CoreBundle\Repository\ResetRequestRepositoryInterface;
+use DCS\User\CoreBundle\Model\UserInterface;
 
 class UserCanCreateNewResetRequest
 {

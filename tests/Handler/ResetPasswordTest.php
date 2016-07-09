@@ -9,15 +9,15 @@ use DCS\PasswordReset\CoreBundle\Exception\ResetRequestAlreadyUsedException;
 use DCS\PasswordReset\CoreBundle\Exception\TimeToLiveException;
 use DCS\PasswordReset\CoreBundle\Exception\UnauthorizedResetPasswordException;
 use DCS\PasswordReset\CoreBundle\Handler\ResetPassword;
+use DCS\PasswordReset\CoreBundle\Manager\Save as ResetRequestSave;
 use DCS\PasswordReset\CoreBundle\Service\DateTimeGenerator\DateTimeGeneratorInterface;
 use DCS\PasswordReset\CoreBundle\Tests\Helper\ResetRequest;
 use DCS\User\CoreBundle\Helper\PasswordHelperInterface;
+use DCS\User\CoreBundle\Manager\Save as UserSave;
 use DCS\User\CoreBundle\Model\UserInterface;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use DCS\User\CoreBundle\Manager\Save as UserSave;
-use DCS\PasswordReset\CoreBundle\Manager\Save as ResetRequestSave;
 
 class ResetPasswordTest extends \PHPUnit_Framework_TestCase
 {
