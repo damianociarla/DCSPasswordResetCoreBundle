@@ -25,8 +25,7 @@ class ResetPasswordCommand extends ContainerAwareCommand
         $token = $input->getArgument('token');
         $password = $input->getArgument('password');
 
-        $passwordReset = $this->getContainer()->get('dcs_password_reset.handler.reset_password_from_token');
-        $passwordReset($token, $password);
+        $this->getContainer()->get('dcs_password_reset.handler.reset_password_from_token')->__invoke($token, $password);
 
         $formatter = $this->getHelper('formatter');
         $formattedBlock = $formatter->formatBlock(['Success!', 'The password has been successfully updated'], 'success', true);

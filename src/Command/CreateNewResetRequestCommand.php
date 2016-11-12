@@ -45,8 +45,7 @@ class CreateNewResetRequestCommand extends ContainerAwareCommand
             throw new \Exception('User not found');
         }
 
-        $createResetRequest = $this->getContainer()->get('dcs_password_reset.handler.create_reset_request');
-        $resetRequest = $createResetRequest($user);
+        $resetRequest = $this->getContainer()->get('dcs_password_reset.handler.create_reset_request')->__invoke($user);
 
         $formatter = $this->getHelper('formatter');
         $formattedBlock = $formatter->formatBlock(['Success!', sprintf('The password change request was created correctly. The token to use is: %s', $resetRequest->getToken())], 'success',true);
