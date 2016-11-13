@@ -27,7 +27,7 @@ class ResetRequestAlreadyUsedException extends \Exception
      *
      * @return ResetRequestInterface
      */
-    public function getRequestRequest()
+    public function getResetRequest()
     {
         return $this->requestRequest;
     }
