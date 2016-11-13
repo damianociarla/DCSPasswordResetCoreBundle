@@ -17,7 +17,9 @@
   "require-dev": {
     "phpunit/phpunit": "^5",
     "dcs/user-core-bundle": "~1.0@dev",
-    "symfony/framework-bundle": "~2.8|~3.0"
+    "symfony/framework-bundle": "~2.8|~3.0",
+    "satooshi/php-coveralls": "~1.0",
+    "phpunit/phpcov": "3.*"
   },
   "suggest": {
     "dcs/password-reset-explain-view-bundle": "Provides the visual display of password recovery services through view and form",
