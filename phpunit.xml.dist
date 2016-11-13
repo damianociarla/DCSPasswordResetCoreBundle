@@ -7,16 +7,14 @@
             <directory>tests</directory>
         </testsuite>
     </testsuites>
-
     <filter>
-        <whitelist>
-            <directory>./src</directory>
-            <exclude>
-                <directory>./src/DependencyInjection</directory>
-                <directory>./tests</directory>
-                <directory>./vendor</directory>
-            </exclude>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">src</directory>
         </whitelist>
     </filter>
+    <logging>
+        <log type="coverage-clover" target="build/logs/clover.xml"/>
+    </logging>
+
 </phpunit>
 
