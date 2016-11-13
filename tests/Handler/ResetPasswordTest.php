@@ -15,9 +15,7 @@ use DCS\PasswordReset\CoreBundle\Tests\Helper\ResetRequest;
 use DCS\User\CoreBundle\Helper\PasswordHelperInterface;
 use DCS\User\CoreBundle\Manager\Save as UserSave;
 use DCS\User\CoreBundle\Model\UserInterface;
-use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\EventDispatcher;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class ResetPasswordTest extends \PHPUnit_Framework_TestCase
 {

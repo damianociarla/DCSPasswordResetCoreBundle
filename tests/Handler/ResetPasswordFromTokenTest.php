@@ -2,20 +2,11 @@
 
 namespace DCS\PasswordReset\CoreBundle\Tests\Handler;
 
-use DCS\PasswordReset\CoreBundle\Checker\UserCanCreateNewResetRequest;
-use DCS\PasswordReset\CoreBundle\DCSPasswordResetCoreEvents;
-use DCS\PasswordReset\CoreBundle\Event\UserCheckerEvent;
 use DCS\PasswordReset\CoreBundle\Exception\ResetRequestNotFoundException;
-use DCS\PasswordReset\CoreBundle\Exception\UnauthorizedCreateNewResetRequestException;
-use DCS\PasswordReset\CoreBundle\Handler\CreateResetRequest;
 use DCS\PasswordReset\CoreBundle\Handler\ResetPassword;
 use DCS\PasswordReset\CoreBundle\Handler\ResetPasswordFromToken;
-use DCS\PasswordReset\CoreBundle\Manager\Save;
 use DCS\PasswordReset\CoreBundle\Repository\ResetRequestRepositoryInterface;
-use DCS\PasswordReset\CoreBundle\Service\ResetRequestFactoryInterface;
 use DCS\PasswordReset\CoreBundle\Tests\Helper\ResetRequest;
-use DCS\User\CoreBundle\Model\UserInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class ResetPasswordFromTokenTest extends \PHPUnit_Framework_TestCase
 {

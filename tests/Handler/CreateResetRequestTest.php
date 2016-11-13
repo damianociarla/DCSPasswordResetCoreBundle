@@ -12,7 +12,6 @@ use DCS\PasswordReset\CoreBundle\Service\ResetRequestFactoryInterface;
 use DCS\PasswordReset\CoreBundle\Tests\Helper\ResetRequest;
 use DCS\User\CoreBundle\Model\UserInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class CreateResetRequestTest extends \PHPUnit_Framework_TestCase
 {
