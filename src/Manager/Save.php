@@ -27,9 +27,9 @@ class Save
     /**
      * Save user
      *
-     * @see DCSPasswordResetCoreEvents::BEFORE_SAVE_USER
-     * @see DCSPasswordResetCoreEvents::SAVE_USER
-     * @see DCSPasswordResetCoreEvents::AFTER_SAVE_USER
+     * @see DCSPasswordResetCoreEvents::BEFORE_SAVE_RESET_REQUEST
+     * @see DCSPasswordResetCoreEvents::SAVE_RESET_REQUEST
+     * @see DCSPasswordResetCoreEvents::AFTER_SAVE_RESET_REQUEST
      *
      * @param ResetRequestInterface $resetRequest
      */
