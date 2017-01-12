@@ -70,6 +70,10 @@ The complete configuration includes other parameters that you can change:
         services:
             token_generator: dcs_password_reset.service.token_generator.random            # service to generate the token
             date_time_generator: dcs_password_reset.service.date_time_generator.generic   # service to generate the date
+	
+## Events
+
+The complete list of events is within the class [DCS\PasswordReset\CoreBundle\DCSPasswordResetCoreEvents](https://github.com/damianociarla/DCSPasswordResetCoreBundle/blob/master/src/DCSPasswordResetCoreEvents.php).
 
 ## The DCSPasswordReset bundles
 
